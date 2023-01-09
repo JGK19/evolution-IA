@@ -48,10 +48,11 @@ class Creature:
         self.food_eat = 0
 
         self.steps = 0
-        self.max_steps = 500
+        self.max_steps = 1000
 
     def do_all(self, win, foods, creatures, creatures2):
         self.draw_agent(win)
+        self.eat(foods)
         self.brain(foods)
         self.dead(creatures2)
 
@@ -109,11 +110,12 @@ class Creature:
 
         self.move(neurons[0], neurons[1], neurons[2], neurons[3],)
 
-    def eat(self, food, foods):
-        distance = functions.distance(self.x, self.y, food.x, food.y)
-        if self.radius + food.radius >= distance:
-            foods.remove(food)
-            self.food_eat += 1
+    def eat(self, foods):
+        for food in foods:
+            distance = functions.distance(self.x, self.y, food.x, food.y)
+            if self.radius + food.radius >= distance:
+                foods.remove(food)
+                self.food_eat += 1
 
     def dead(self, creatures2):
         if self.steps >= self.max_steps:
@@ -134,7 +136,7 @@ class Restart:
 
         self.respawn_food(10, foods)
 
-        x = 1000
+        x = 100
         for i in range(x):
             valor = functions.mutation(best.neuros)
             creatures.append(Creature(neuros=valor))
