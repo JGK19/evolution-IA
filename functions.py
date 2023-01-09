@@ -18,7 +18,7 @@ def get_angle(thing_x, thing_y, self_x, self_y):
 
 
 def mutation(neuros_input):
-    list_tax_mutation = [100, 200, 300, 400, 50, 150, 250, 350, 70, 180]
+    list_tax_mutation = range(0, 1000, 50)
 
     neuros = neuros_input
 

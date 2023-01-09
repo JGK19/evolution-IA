@@ -31,19 +31,10 @@ def main():
 
     restart = classes.Restart()
 
-    neuros = [random.randint(-1000, 1000),
-              random.randint(-1000, 1000),
-              random.randint(-1000, 1000),
-              random.randint(-1000, 1000),
-              random.randint(-1000, 1000),
-              random.randint(-1000, 1000),
-              random.randint(-1000, 1000),
-              random.randint(-1000, 1000)]
 
-    x = 100
-    for i in range(x):
-        valor = functions.mutation(neuros)
-        creatures.append(classes.Creature(neuros=valor))
+    a = 100
+    for i in range(a):
+        creatures.append(classes.Creature())
 
     creatures2 = creatures[:]
 

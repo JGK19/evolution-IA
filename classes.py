@@ -139,7 +139,7 @@ class Restart:
         x = 100
         for i in range(x):
             valor = functions.mutation(best.neuros)
-            creatures.append(Creature(neuros=valor))
+            creatures.append(Creature())
 
         creatures2.clear()
 
