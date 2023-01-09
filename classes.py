@@ -119,9 +119,12 @@ class Creature:
 
     def dead(self, creatures2):
         if self.steps >= self.max_steps:
-            self.alive = False
-            creatures2.append(self)
-            self.speed = 0
+            if self.alive:
+                self.alive = False
+                creatures2.append(self)
+                self.speed = 0
+            else:
+                pass
 
 
 class Restart:
