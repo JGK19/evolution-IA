@@ -32,13 +32,13 @@ def main():
     restart = classes.Restart()
 
 
-    a = 200
+    a = 10
     for i in range(a):
         creatures.append(classes.Creature(neuros = None))
 
     creatures2 = creatures[:]
 
-    y = 25
+    y = 15
     for i in range(y):
         foods.append(classes.Food())
 

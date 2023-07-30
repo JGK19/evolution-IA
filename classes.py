@@ -8,8 +8,8 @@ ALTURA, LARGURA = 800, 600
 class Food:
     def __init__(self, color=(255, 255, 0), radius=5):
 
-        self.x = random.randint(50, LARGURA - 50)
-        self.y = random.randint(50, ALTURA - 50)
+        self.x = random.randint(50, LARGURA - 100)
+        self.y = random.randint(50, ALTURA - 100)
 
         self.color = color
 
@@ -155,9 +155,9 @@ class Restart:
         creatures.clear()
         foods.clear()
 
-        self.respawn_food(40, foods)
+        self.respawn_food(30, foods)
 
-        x = 200
+        x = 10
         if best.food_eat > 0:
             for i in range(x):
                 valor = functions.mutation(best.neuros)
