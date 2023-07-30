@@ -38,7 +38,7 @@ def main():
 
     creatures2 = creatures[:]
 
-    y = 20
+    y = 25
     for i in range(y):
         foods.append(classes.Food())
 
@@ -60,9 +60,12 @@ def main():
             creature.do_all(WIN, foods, creatures, creatures2)
 
         x += 1
-        print(len(creatures), len(creatures2), x)
+        #print(len(creatures), len(creatures2), x)
         if len(foods) == 0 or len(creatures2) == len(creatures) or x > 2000:
             x = 0
+            #for creature in creatures2:
+                #print(creature.neuros)
+
             restart.restarting(creatures, foods, creatures2)
 
         chesh = FONT0.render(f"generation: {restart.generation}", True, (0, 0, 0))

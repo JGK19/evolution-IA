@@ -38,8 +38,8 @@ class Creature:
 
         self.alive = True
 
-        self.x = x
-        self.y = y
+        self.x = random.randint(0, LARGURA)
+        self.y = random.randint(0, ALTURA)
 
         self.color = color
         self.radius = radius
@@ -69,12 +69,16 @@ class Creature:
             distance_for_food = functions.distance(self.x, self.y, food.x, food.y)
             field_of_view.append((food.x, food.y, distance_for_food))
 
-        field_of_view.sort(key=lambda key_sort: key_sort[1])
-
-        return str(field_of_view[0][0]), str(field_of_view[0][1]), str(field_of_view[0][2])
+        field_of_view.sort(key=lambda key_sort: key_sort[2])
+        if len(field_of_view) != 0:
+            return str(field_of_view[0][0]), str(field_of_view[0][1]), str(field_of_view[0][2])
+        else:
+            return
 
     def eyes(self, foods):
         var = self.fov(foods)
+        if var == None:
+            return
 
         best_distance = float(var[2])
 
@@ -85,19 +89,29 @@ class Creature:
     def move(self, up, right, left, down):
         if up > 0:
             self.y -= self.speed
+            if self.y < 0:
+                self.y = 0
             self.steps += 1
         if down > 0:
             self.y += self.speed
+            if self.y > 600:
+                self.y = 600
             self.steps += 1
         if right > 0:
             self.x += self.speed
+            if self.x > 800:
+                self.x = 800
             self.steps += 1
         if left > 0:
             self.x -= self.speed
+            if self.x < 0:
+                self.x = 0
             self.steps += 1
 
     def brain(self, foods):
         receptors = self.eyes(foods)
+        if receptors == None:
+            return
 
         times = self.neuros
 
@@ -134,15 +148,22 @@ class Restart:
     def restarting(self, creatures, foods, creatures2):
         self.generation += 1
         best = self.take_the_best(creatures)
+        print(best.neuros, best.food_eat)
         creatures.clear()
         foods.clear()
 
-        self.respawn_food(10, foods)
+        self.respawn_food(20, foods)
 
         x = 100
-        for i in range(x):
-            valor = functions.mutation(best.neuros)
-            creatures.append(Creature())
+        if best.food_eat > 0:
+            for i in range(x):
+                valor = functions.mutation(best.neuros)
+                creatures.append(Creature(neuros = valor[:]))
+        else:
+            valor = (best.neuros)
+            creatures.append(Creature(neuros = valor[:]))
+            for i in range(x-1):
+                creatures.append(Creature())
 
         creatures2.clear()
 
