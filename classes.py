@@ -32,7 +32,8 @@ class Creature:
                            random.randint(-1000, 1000),
                            random.randint(-1000, 1000),
                            random.randint(-1000, 1000),
-                           random.randint(-1000, 1000)]
+                           random.randint(-1000, 1000),
+                          ]
         else:
             self.neuros = neuros
 
@@ -43,7 +44,7 @@ class Creature:
 
         self.color = color
         self.radius = radius
-        self.speed = 2
+        self.speed = 4
 
         self.food_eat = 0
 
@@ -84,7 +85,10 @@ class Creature:
 
         angle = functions.get_angle(float(var[0]), float(var[1]), self.x, self.y)
 
-        return best_distance, angle
+        delta_x = self.x - float(var[0]) 
+        delta_y = self.y - float(var[1]) 
+
+        return delta_x, delta_y
 
     def move(self, up, right, left, down):
         if up > 0:
@@ -117,12 +121,11 @@ class Creature:
 
         neurons = [0, 0, 0, 0]
 
-        neurons[0] = (receptors[0] * times[0]) + (receptors[1] * times[1])
-        neurons[1] = (receptors[0] * times[2]) + (receptors[1] * times[3])
-        neurons[2] = (receptors[0] * times[4]) + (receptors[1] * times[5])
-        neurons[3] = (receptors[0] * times[6]) + (receptors[1] * times[7])
-
-        self.move(neurons[0], neurons[1], neurons[2], neurons[3],)
+        neurons[0] = (receptors[1] * times[0]) + (receptors[0] * times[4]) 
+        neurons[1] = (receptors[1] * times[1]) + (receptors[0] * times[5])
+        neurons[2] = (receptors[1] * times[2]) + (receptors[0] * times[6])
+        neurons[3] = (receptors[1] * times[3]) + (receptors[0] * times[7])
+        self.move(neurons[0], neurons[1], neurons[2], neurons[3])
 
     def eat(self, foods):
         for food in foods:
@@ -152,12 +155,13 @@ class Restart:
         creatures.clear()
         foods.clear()
 
-        self.respawn_food(20, foods)
+        self.respawn_food(40, foods)
 
-        x = 100
+        x = 200
         if best.food_eat > 0:
             for i in range(x):
                 valor = functions.mutation(best.neuros)
+                #valor = (best.neuros)
                 creatures.append(Creature(neuros = valor[:]))
         else:
             valor = (best.neuros)

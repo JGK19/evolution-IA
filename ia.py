@@ -32,9 +32,9 @@ def main():
     restart = classes.Restart()
 
 
-    a = 100
+    a = 200
     for i in range(a):
-        creatures.append(classes.Creature())
+        creatures.append(classes.Creature(neuros = None))
 
     creatures2 = creatures[:]
 
@@ -61,7 +61,7 @@ def main():
 
         x += 1
         #print(len(creatures), len(creatures2), x)
-        if len(foods) == 0 or len(creatures2) == len(creatures) or x > 2000:
+        if len(foods) == 0 or len(creatures2) == len(creatures) or x > 1000:
             x = 0
             #for creature in creatures2:
                 #print(creature.neuros)
